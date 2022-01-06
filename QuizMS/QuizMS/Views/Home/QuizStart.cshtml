@@ -1,0 +1,127 @@
+﻿@model QuizMS.Models.tbl_questions
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>QuizStart</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-image: url('../../Content/Img/login2.jpg');
+            background-size: cover;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function startCountdown(timeLeft) {
+            var interval = setInterval(countdown, 1000);
+            update();
+            function countdown() {
+                if (--timeLeft > 0) {
+                    update();
+                } else {
+                    clearInterval(interval);
+                    update();
+                    completed();
+                }
+            }
+
+            function update() {
+
+
+                hours = Math.floor(timeLeft / 3600);
+                minutes = Math.floor((timeLeft % 3600) / 60);
+                seconds = timeLeft % 60;
+
+                document.getElementById('time-left').innerHTML = '' + hours + ':' + minutes + ':' + seconds;
+
+            }
+
+            function completed() {
+
+                window.location = "https://localhost:44309/Home/QuizStart"
+
+
+            }
+        }
+        history.replaceState(null, null, ' https://localhost:44309/Home/slogin');
+    </script>
+
+
+
+
+
+</head>
+<body onload="startCountdown(20);">
+
+    <h3 style="margin-top:80px;color:red;text-align:center;">Time is up in <span id="time-left"></span></h3>
+    <br />
+    <br />
+    <br />
+
+
+    <h2>Note! You not able to back so if u try to go back your quiz will be end.</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#00044b;font-size:18px;">
+            <div class="container">
+                <div class="navbar-header">
+
+                    @Html.ActionLink("WEB QUIZ SYSTEM", "Index", "Home", new { area = " " }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Student Login", "slogin", "Home")</li>
+                        <li style="margin-left:700px;">
+                            @Html.ActionLink("Logout", "Logout", "Home")
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class=" container" style="background-color:#00044b;color:white; width:660px;border-radius:10px;margin-left:350px;margin-top:40px;height:auto;padding:30px">
+            <div class="row">
+                <div class="col-lg-10 col-md-10 col-xs-10 col-sm-10"></div>
+                <div class="row">
+
+                    <h4 style="margin-left:30px;">Q) @Html.DisplayFor(x => x.q_txt)</h4>
+                </div><hr />
+                <h4 style="margin-left:30px;background-color:#171b72;margin-right:30px;text-align:center">Options</h4>
+                <div class="row" style="margin-left:30px;">
+                    <h5>(A)    @Html.RadioButtonFor(x => x.opa, @Model.question_id) @Model.opa </h5><br />
+                </div>
+                <div class="row" style="margin-left:30px">
+                    <h5>(B)   @Html.RadioButtonFor(x => x.opb, @Model.question_id) @Model.opb</h5><br />
+                </div>
+                <div class="row" style="margin-left:30px">
+                    <h5>(C)   @Html.RadioButtonFor(x => x.opc, @Model.question_id) @Model.opc</h5><br />
+                </div>
+                <div class="row" style="margin-left:30px">
+                    <h5>(D)   @Html.RadioButtonFor(x => x.opd, @Model.question_id) @Model.opd</h5><br />
+                </div>
+                <div class="row" style="display:none;margin-left:30px">
+                    @Html.TextBoxFor(x => x.cop)
+                </div>
+            </div>
+            <hr />
+            <div class="rown">
+                <input type="submit" value="Submit" class="btn btn-success" style="margin-top:-30px;margin-left:530px;margin-top:10px" />
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2">
+
+        </div>
+
+    }
+
+</body>
+</html>

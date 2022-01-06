@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f88060c8b4c945fe909c8ed01866a52a" Name="Diagram1">
+        <EntityTypeShape EntityType="DBQuizModel.chapter" Width="1.5" PointX="8.375" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBQuizModel.exam" Width="1.5" PointX="10" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBQuizModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBQuizModel.tbl_admin" Width="1.5" PointX="4.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBQuizModel.tbl_category" Width="1.5" PointX="0.875" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBQuizModel.tbl_questions" Width="1.5" PointX="2.625" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBQuizModel.tbl_students" Width="1.5" PointX="6.625" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="DBQuizModel.FK__chapter__cat_id__19DFD96B" ManuallyRouted="false" />
+        <AssociationConnector Association="DBQuizModel.FK__chapter__cat_id__1AD3FDA4" ManuallyRouted="false" />
+        <AssociationConnector Association="DBQuizModel.FK__exam__cat_id__160F4887" ManuallyRouted="false" />
+        <AssociationConnector Association="DBQuizModel.FK__exam__cat_id__17036CC0" ManuallyRouted="false" />
+        <AssociationConnector Association="DBQuizModel.FK__tbl_categ__cat_f__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="DBQuizModel.FK__tbl_quest__q_fk___37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="DBQuizModel.FK__tbl_quest__ch_id__1BC821DD" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

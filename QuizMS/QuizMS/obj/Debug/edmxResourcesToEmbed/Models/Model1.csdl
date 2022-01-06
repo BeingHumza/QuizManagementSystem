@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBQuizModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="chapter">
+    <Key>
+      <PropertyRef Name="ch_id" />
+    </Key>
+    <Property Name="ch_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ch_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="ad_id" Type="Int32" />
+    <Property Name="cat_id" Type="Int32" />
+    <NavigationProperty Name="tbl_admin" Relationship="Self.FK__chapter__cat_id__19DFD96B" FromRole="chapter" ToRole="tbl_admin" />
+    <NavigationProperty Name="tbl_category" Relationship="Self.FK__chapter__cat_id__1AD3FDA4" FromRole="chapter" ToRole="tbl_category" />
+    <NavigationProperty Name="tbl_questions" Relationship="DBQuizModel.FK__tbl_quest__ch_id__1BC821DD" FromRole="chapter" ToRole="tbl_questions" />
+  </EntityType>
+  <EntityType Name="exam">
+    <Key>
+      <PropertyRef Name="e_id" />
+    </Key>
+    <Property Name="e_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="e_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="e_score" Type="Int32" />
+    <Property Name="std_id" Type="Int32" />
+    <Property Name="cat_id" Type="Int32" />
+    <NavigationProperty Name="tbl_students" Relationship="Self.FK__exam__cat_id__160F4887" FromRole="exam" ToRole="tbl_students" />
+    <NavigationProperty Name="tbl_category" Relationship="Self.FK__exam__cat_id__17036CC0" FromRole="exam" ToRole="tbl_category" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbl_admin">
+    <Key>
+      <PropertyRef Name="ad_id" />
+    </Key>
+    <Property Name="ad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ad_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ad_password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="chapters" Relationship="Self.FK__chapter__cat_id__19DFD96B" FromRole="tbl_admin" ToRole="chapter" />
+    <NavigationProperty Name="tbl_category" Relationship="Self.FK__tbl_categ__cat_f__36B12243" FromRole="tbl_admin" ToRole="tbl_category" />
+  </EntityType>
+  <EntityType Name="tbl_category">
+    <Key>
+      <PropertyRef Name="cat_id" />
+    </Key>
+    <Property Name="cat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cat_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cat_fk_adid" Type="Int32" />
+    <Property Name="cat_encryptedstring" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="chapters" Relationship="Self.FK__chapter__cat_id__1AD3FDA4" FromRole="tbl_category" ToRole="chapter" />
+    <NavigationProperty Name="exams" Relationship="Self.FK__exam__cat_id__17036CC0" FromRole="tbl_category" ToRole="exam" />
+    <NavigationProperty Name="tbl_admin" Relationship="Self.FK__tbl_categ__cat_f__36B12243" FromRole="tbl_category" ToRole="tbl_admin" />
+    <NavigationProperty Name="tbl_questions" Relationship="Self.FK__tbl_quest__q_fk___37A5467C" FromRole="tbl_category" ToRole="tbl_questions" />
+  </EntityType>
+  <EntityType Name="tbl_questions">
+    <Key>
+      <PropertyRef Name="question_id" />
+    </Key>
+    <Property Name="question_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="q_txt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="opa" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="opb" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="opc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="opd" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cop" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="q_fk_ct_id" Type="Int32" />
+    <NavigationProperty Name="tbl_category" Relationship="Self.FK__tbl_quest__q_fk___37A5467C" FromRole="tbl_questions" ToRole="tbl_category" />
+    <Property Name="ch_id" Type="Int32" />
+    <NavigationProperty Name="chapter" Relationship="DBQuizModel.FK__tbl_quest__ch_id__1BC821DD" FromRole="tbl_questions" ToRole="chapter" />
+  </EntityType>
+  <EntityType Name="tbl_students">
+    <Key>
+      <PropertyRef Name="std_id" />
+    </Key>
+    <Property Name="std_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="std_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="std_password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="exams" Relationship="Self.FK__exam__cat_id__160F4887" FromRole="tbl_students" ToRole="exam" />
+    <Property Name="std_email" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK__chapter__cat_id__19DFD96B">
+    <End Role="tbl_admin" Type="Self.tbl_admin" Multiplicity="0..1" />
+    <End Role="chapter" Type="Self.chapter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_admin">
+        <PropertyRef Name="ad_id" />
+      </Principal>
+      <Dependent Role="chapter">
+        <PropertyRef Name="ad_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__chapter__cat_id__1AD3FDA4">
+    <End Role="tbl_category" Type="Self.tbl_category" Multiplicity="0..1" />
+    <End Role="chapter" Type="Self.chapter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_category">
+        <PropertyRef Name="cat_id" />
+      </Principal>
+      <Dependent Role="chapter">
+        <PropertyRef Name="cat_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__exam__cat_id__160F4887">
+    <End Role="tbl_students" Type="Self.tbl_students" Multiplicity="0..1" />
+    <End Role="exam" Type="Self.exam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_students">
+        <PropertyRef Name="std_id" />
+      </Principal>
+      <Dependent Role="exam">
+        <PropertyRef Name="std_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__exam__cat_id__17036CC0">
+    <End Role="tbl_category" Type="Self.tbl_category" Multiplicity="0..1" />
+    <End Role="exam" Type="Self.exam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_category">
+        <PropertyRef Name="cat_id" />
+      </Principal>
+      <Dependent Role="exam">
+        <PropertyRef Name="cat_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_categ__cat_f__36B12243">
+    <End Role="tbl_admin" Type="Self.tbl_admin" Multiplicity="0..1" />
+    <End Role="tbl_category" Type="Self.tbl_category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_admin">
+        <PropertyRef Name="ad_id" />
+      </Principal>
+      <Dependent Role="tbl_category">
+        <PropertyRef Name="cat_fk_adid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_quest__q_fk___37A5467C">
+    <End Role="tbl_category" Type="Self.tbl_category" Multiplicity="0..1" />
+    <End Role="tbl_questions" Type="Self.tbl_questions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_category">
+        <PropertyRef Name="cat_id" />
+      </Principal>
+      <Dependent Role="tbl_questions">
+        <PropertyRef Name="q_fk_ct_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBQuizEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="chapters" EntityType="Self.chapter" />
+    <EntitySet Name="exams" EntityType="Self.exam" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="tbl_admin" EntityType="Self.tbl_admin" />
+    <EntitySet Name="tbl_category" EntityType="Self.tbl_category" />
+    <EntitySet Name="tbl_questions" EntityType="Self.tbl_questions" />
+    <EntitySet Name="tbl_students" EntityType="Self.tbl_students" />
+    <AssociationSet Name="FK__chapter__cat_id__19DFD96B" Association="Self.FK__chapter__cat_id__19DFD96B">
+      <End Role="tbl_admin" EntitySet="tbl_admin" />
+      <End Role="chapter" EntitySet="chapters" />
+    </AssociationSet>
+    <AssociationSet Name="FK__chapter__cat_id__1AD3FDA4" Association="Self.FK__chapter__cat_id__1AD3FDA4">
+      <End Role="tbl_category" EntitySet="tbl_category" />
+      <End Role="chapter" EntitySet="chapters" />
+    </AssociationSet>
+    <AssociationSet Name="FK__exam__cat_id__160F4887" Association="Self.FK__exam__cat_id__160F4887">
+      <End Role="tbl_students" EntitySet="tbl_students" />
+      <End Role="exam" EntitySet="exams" />
+    </AssociationSet>
+    <AssociationSet Name="FK__exam__cat_id__17036CC0" Association="Self.FK__exam__cat_id__17036CC0">
+      <End Role="tbl_category" EntitySet="tbl_category" />
+      <End Role="exam" EntitySet="exams" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_categ__cat_f__36B12243" Association="Self.FK__tbl_categ__cat_f__36B12243">
+      <End Role="tbl_admin" EntitySet="tbl_admin" />
+      <End Role="tbl_category" EntitySet="tbl_category" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_quest__q_fk___37A5467C" Association="Self.FK__tbl_quest__q_fk___37A5467C">
+      <End Role="tbl_category" EntitySet="tbl_category" />
+      <End Role="tbl_questions" EntitySet="tbl_questions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_quest__ch_id__1BC821DD" Association="DBQuizModel.FK__tbl_quest__ch_id__1BC821DD">
+      <End Role="chapter" EntitySet="chapters" />
+      <End Role="tbl_questions" EntitySet="tbl_questions" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK__tbl_quest__ch_id__1BC821DD">
+    <End Type="DBQuizModel.chapter" Role="chapter" Multiplicity="0..1" />
+    <End Type="DBQuizModel.tbl_questions" Role="tbl_questions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="chapter">
+        <PropertyRef Name="ch_id" />
+      </Principal>
+      <Dependent Role="tbl_questions">
+        <PropertyRef Name="ch_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

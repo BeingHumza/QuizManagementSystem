@@ -1,0 +1,109 @@
+﻿@using PagedList.Mvc
+
+@model PagedList.IPagedList<QuizMS.Models.tbl_category>
+@{
+    Layout = null;
+}
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width" />
+<title>Select Category</title>
+<style>
+    body {
+        background-image: url('../../Content/Img/login2.jpg');
+        background-size: cover;
+    }
+</style>
+<script>
+
+    history.replaceState(null, null, ' https://localhost:44309/Home/QuizStart');
+
+</script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+@using (Html.BeginForm())
+{
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#00044b;font-size:18px;">
+        <div class="container">
+            <div class="navbar-header">
+
+                @Html.ActionLink("WEB QUIZ SYSTEM", "Index", "Home", new { area = " " }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Student Login", "slogin", "Home")</li>
+                    <li style="margin-left:700px;">
+                        @Html.ActionLink("Logout", "Logout", "Home")
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    <div class="container" style="width:50%">
+        <br />
+        <br /><br /><br /><br /><br /><br />
+
+        <h3 style="margin-left:00px;margin-top:-5px;">Enter Course Name</h3>
+        <input type="text" id="room" name="room" placeholder="Please Enter Course Name..." class="form-control" />
+        @if (@ViewBag.error != null)
+        {
+            <div class="alert alert-danger">
+                <strong>Oops!</strong> @ViewBag.error
+            </div>
+        }
+        <br />
+
+        <input type="submit" value="Submit" class="btn  btn-success btn-block" />
+    </div>
+}
+
+<h3 style="margin-left:360px;margin-top:15px;">Quiz Course Table</h3>
+<table class="table table-responsive" style="background-color:#00044b;color:white; width:660px;border-radius:10px;margin-left:350px">
+    <tr>
+        <th style="text-align:center">
+            @* @Html.DisplayNameFor(model => model.cat_name)*@
+            Course Name
+        </th>
+
+        <th style="text-align:center">
+            Admin Name
+            @*  @Html.DisplayNameFor(model => model.tbl_admin.ad_name)*@
+        </th>
+        <th></th>
+    </tr>
+
+    @*  @foreach (var item in Model)*@
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.cat_name)
+            </td>
+
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.tbl_admin.ad_name)
+            </td>
+            <td>
+            </td>
+        </tr>
+
+    }
+</table>
+<div id="container" style="margin-left:20px">
+    <div class="pagination" style="margin-left:400px">
+        Page @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount @Html.PagedListPager(Model, page => Url.Action("selectcategory", new { page }))
+
+    </div>
+</div>
+
+
+

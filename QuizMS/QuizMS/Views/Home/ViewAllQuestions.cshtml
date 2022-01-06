@@ -1,0 +1,109 @@
+﻿
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<QuizMS.Models.tbl_questions>
+
+@{
+    ViewBag.Title = "ViewAllQuestions";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<title>View All Questions</title>
+<style>
+    body {
+        background-image: url('../../Content/Img/login2.jpg');
+        background-size: cover;
+    }
+</style><div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#00044b;font-size:18px;">
+    <div class="container">
+        <div class="navbar-header">
+            @Html.ActionLink("WEB QUIZ SYSTEM", "Index", "Home", new { area = " " }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li style="color:white;">@Html.ActionLink("Admin Login", "tlogin", "Home")</li>
+                <li style="margin-left:700px;">
+                    @Html.ActionLink("Logout", "Logout", "Home")
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<h2 style="margin-left:10px">View All Questions</h2>
+<hr />
+<table class="table" style="background-color:#00044b;width:98%; color:white;">
+    <tr>
+        <th style="text-align:center">
+            Question
+        </th>
+        <th style="text-align:center">
+            Option A
+        </th>
+        <th style="text-align:center">
+            Option B
+        </th>
+        <th style="text-align:center">
+            Option C
+        </th>
+        <th style="text-align:center">
+            Option D
+        </th>
+        <th style="text-align:center">
+            Correct Option
+        </th>
+        <th style="text-align:center">
+            Course
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.q_txt)
+            </td>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.opa)
+            </td>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.opb)
+            </td>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.opc)
+            </td>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.opd)
+            </td>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.cop)
+            </td>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.tbl_category.cat_name)
+            </td>
+            @*<td>
+
+                @Html.ActionLink("Add New Question", "Create", new { id = item.question_id })
+                @Html.ActionLink("Edit Question", "Create", new { id = item.question_id })
+                @Html.ActionLink("Delete Question", "Create", new { id = item.question_id })*@
+            <td> <a class="btn btn-info btn-sm" href="@Url.Action("Create_Question",new {id=item.question_id })"> Add new question</a></td>
+            <td> <a class="btn btn-info btn-sm" href="@Url.Action("Edit_Question",new {id=item.question_id })"> Edit Question</a></td>
+            <td> <a class="btn btn-info btn-sm" href="@Url.Action("Delete_Question",new {id=item.question_id })"> Delete Question</a></td>
+
+
+
+        </tr>
+    }
+
+</table>
+<div id="container" style="margin-left:20px">
+    <p></p>
+    <p></p>
+    <div class="pagination" style="margin-left: 400px
+">
+        Page @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount @Html.PagedListPager(Model, page => Url.Action("ViewAllQuestions", new { page }))
+    </div>
+</div>
+

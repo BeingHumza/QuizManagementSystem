@@ -1,0 +1,45 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>End_Exam</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-image: url('../../Content/Img/login2.jpg');
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#00044b;font-size:18px;">
+        <div class="container">
+            <div class="navbar-header">
+
+                @Html.ActionLink("WEB QUIZ SYSTEM", "Index", "Home", new { area = " " }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Student Login", "slogin", "Home")</li>
+                    <li style="margin-left:700px;">
+                        @Html.ActionLink("Logout", "Logout", "Home")
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <br /><br /><br />
+    <div style="background:url(../../Content/Img/background.jpg);width:35%;height:200px;margin-left:450px;border-radius:100px;color:white;margin-top:150px">
+        <br /><h1 style="text-align:center;margin-top:30px">Quiz End! Thank You</h1><br />
+        <h2 style="text-align:center">Your Score is<strong> @TempData["score"]</strong></h2>
+    </div>
+</body>
+</html>
+

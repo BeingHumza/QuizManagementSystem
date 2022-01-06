@@ -1,0 +1,86 @@
+﻿
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<QuizMS.Models.exam>
+
+@{ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<title>Dashboard</title>
+<style>
+    body {
+        background-image: url('../../Content/Img/login2.jpg');
+        background-size: cover;
+    }
+</style>
+<div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#00044b;font-size:18px;">
+    <div class="container">
+        <div class="navbar-header">
+
+            @Html.ActionLink("WEB QUIZ SYSTEM", "Index", "Home", new { area = " " }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li style="color:white;">@Html.ActionLink("Admin Login", "tlogin", "Home")</li>
+                <li style="margin-left:700px;">
+                    @Html.ActionLink("Logout", "Logout", "Home")
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<h2 style="margin-left:200px">Dashboard</h2>
+<hr />
+
+<table class="table" style="background-color:#00044b;width:98%; color:white;">
+    <tr>
+        <th style="text-align:center">
+            Student ID
+        </th>
+        <th style="text-align:center">
+            Student Name
+        </th>
+        <th style="text-align:center">
+            Course Name
+        </th>
+        <th style="text-align:center">
+            Score
+        </th>
+        <th></th>
+    </tr>
+
+
+    @foreach (var item in Model)
+
+    {
+        <tr>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.tbl_students.std_id)
+            </td>
+
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.tbl_students.std_name)
+            </td>
+
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.e_name)
+            </td>
+
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.e_score)
+            </td>
+        </tr>
+    }
+
+</table>
+<div id="container" style="margin-left:20px">
+    <p></p>
+    <p></p>
+    <div class="pagination" style="margin-left:400px">
+        Page @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount @Html.PagedListPager(Model, page => Url.Action("Dashboard", new { page }))
+    </div>
+</div>

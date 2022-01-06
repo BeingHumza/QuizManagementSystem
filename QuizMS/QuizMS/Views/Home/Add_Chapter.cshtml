@@ -1,0 +1,112 @@
+﻿@model QuizMS.Models.chapter
+
+@{
+    ViewBag.Title = "Add_Category";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add Chapter</title>
+</head>
+<body>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <style>
+        body {
+            background-image: url('../../Content/Img/login2.jpg');
+            background-size: cover;
+        }
+    </style>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#00044b;font-size:18px;">
+            <div class="container">
+                <div class="navbar-header">
+
+                    @Html.ActionLink("WEB QUIZ SYSTEM", "Index", "Home", new { area = " " }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Student Login", "slogin", "Home")</li>
+                        <li style="margin-left:700px;">
+                            @Html.ActionLink("Logout", "Logout", "Home")
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <br />
+
+        <br />
+        <br />
+        <div class="form-horizontal">
+            <h2 style="margin-left:200px;margin-top:-5px;">Add New Chapter</h2>
+            <hr />
+            <div style="background-color:#00044b;color:white; width:50%;margin-left:130px;padding:20px;border-radius:10px;height:250px">
+                <div class="form-group" style="margin-left:70px">
+                    <br />
+                    @Html.LabelFor(model => model.cat_id, "Course Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        @Html.DropDownList("cat_id", ViewBag.list as SelectList, "---Select---", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.cat_id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group" style="margin-left:70px">
+                    @Html.LabelFor(model => model.ch_name, "Chapter Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+
+                        @Html.EditorFor(model => model.ch_name, new { htmlAttributes = new { @class = "form-control" } })
+
+                        @Html.ValidationMessageFor(model => model.ch_name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+
+                <div class="form-group" style="margin-left:320px">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+    <!--<h2 style="margin-left:200px;margin-top:-5px;">Category Table</h2>
+    <table class="table table-responsive" style="background-color:#00044b;color:white; width:500px;margin-left:100px">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>-->
+    @*<th>Room Name</th>
+        <th>View All Questions</th>*@
+    <!--</tr>
+        </thead>
+        <tb
+
+
+                        @*<td>@item.cat_encryptedstring</td>
+                    <td> <a class="btn btn-info btn-sm" href="@Url.Action("ViewAllQuestions",new {id=item.cat_id })"> View All Question(s) of this Quiz</a></td>
+                        *@
+                    <!--</tr>
+                }
+
+        </tbody>
+    </table>-->
+
+</body>
+</html>

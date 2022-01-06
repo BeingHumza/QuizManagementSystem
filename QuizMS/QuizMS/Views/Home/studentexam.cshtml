@@ -1,0 +1,104 @@
+﻿@model IEnumerable<QuizMS.Models.tbl_category>
+@{Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>studentexam</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-image: url('../../Content/Img/login2.jpg');
+            background-size: cover;
+        }
+    </style>
+    <script type="text/javascript">
+
+        history.replaceState(null, null, ' https://localhost:44309/Home/End_Exam');
+
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#00044b;font-size:18px;">
+        <div class="container">
+            <div class="navbar-header">
+
+                @Html.ActionLink("WEB QUIZ SYSTEM", "Index", "Home", new { area = " " }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Student Login", "slogin", "Home")</li>
+                    <li style="margin-left:700px;">
+                        @Html.ActionLink("Logout", "Logout", "Home")
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    @using (Html.BeginForm())
+    {
+
+
+        <div class="container" style="width:50%">
+            <br />
+            <br /><br /><br /><br /><br /><br />
+
+            <h3 style="margin-left:00px;margin-top:-5px;">Enter Chapter Name</h3>
+            <input type="text" id="room" name="room" placeholder="Please copy paste the (Chapter Name) from category table..." class="form-control" />
+            @if (@ViewBag.error != null)
+            {
+                <div class="alert alert-danger">
+                    <strong>Oops!</strong> @ViewBag.error
+                </div>
+            }
+            <br />
+
+            <input type="submit" value="Submit" class="btn  btn-success btn-block" />
+
+        </div>
+        <br /> <br /> <br /><hr />
+        <h3 style="margin-left:360px;margin-top:15px;">Quiz Category Table</h3>
+        <table class="table table-responsive" style="background-color:#00044b;color:white; width:660px;border-radius:10px;margin-left:350px">
+            <tr>
+                <th style="text-align:center">
+                    @* @Html.DisplayNameFor(model => model.cat_name)*@
+                    Chapter No
+                </th>
+                <th style="text-align:center">
+                    Chapter name
+                    @* @Html.DisplayNameFor(model => model.cat_encryptedstring)*@
+                </th>
+
+                <th></th>
+            </tr>
+
+            @*  @foreach (var item in Model)*@
+            @foreach (var item in TempData["list"] as List<QuizMS.Models.chapter>)
+
+            {
+                <tr>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.ch_id)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.ch_name)
+                    </td>
+
+                    <td>
+                    </td>
+                </tr>
+
+
+            }
+        </table>
+
+
+    }
+</body>
+</html>

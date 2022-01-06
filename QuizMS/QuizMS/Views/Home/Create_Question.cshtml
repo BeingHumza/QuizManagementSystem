@@ -1,0 +1,123 @@
+﻿
+@model QuizMS.Models.tbl_questions
+
+@{
+    ViewBag.Title = "Add_Question";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<style>
+    body {
+        background-image: url('../../Content/Img/login2.jpg');
+        background-size: cover;
+    }
+</style>
+<div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#00044b;font-size:18px;">
+    <div class="container">
+        <div class="navbar-header">
+
+            @Html.ActionLink("WEB QUIZ SYSTEM", "Index", "Home", new { area = " " }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li style="color:white;">@Html.ActionLink("Admin Login", "tlogin", "Home")</li>
+                <li style="margin-left:700px;">
+                    @Html.ActionLink("Logout", "Logout", "Home")
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<br />
+<br />
+
+<br />
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <h2 style="margin-left:200px;margin-top:-5px;">Add New Question</h2>
+    <hr />
+    <div style="background-color:#00044b;color:white; width:60%;margin-left:130px;padding:20px;border-radius:10px;height:500px">
+        <div class="form-horizontal">
+
+
+
+            <div class="form-group">
+                <br />
+                @Html.LabelFor(model => model.ch_id, "Chapter NO", htmlAttributes: new { @class = "control-label col-md-2", style = "font-size:12px" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.ch_id, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ch_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.q_txt, "Question", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.q_txt, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.q_txt, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.opa, "Option (A) ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.opa, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.opa, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.opb, "Option (B) ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.opb, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.opb, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.opc, "Option (C) ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.opc, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.opc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.opd, "Option (D) ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.opd, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.opd, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.cop, "Correct-Opt ", htmlAttributes: new { @class = "control-label col-md-2", style = "font-size:12px" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.cop, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.cop, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div>
+                    <div class="col-md-10" style="margin-left:450px;margin-top:0px">
+                        <input type="submit" value="Create" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

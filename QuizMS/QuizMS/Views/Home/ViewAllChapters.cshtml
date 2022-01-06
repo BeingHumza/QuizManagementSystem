@@ -1,0 +1,79 @@
+﻿@using PagedList.Mvc
+
+@model PagedList.IPagedList<QuizMS.Models.chapter>
+@{
+    ViewBag.Title = "ViewAllChapters";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<title>View all Chapters</title>
+<style>
+    body {
+        background-image: url('../../Content/Img/login2.jpg');
+        background-size: cover;
+    }
+</style>
+<div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#00044b;font-size:18px;">
+    <div class="container">
+        <div class="navbar-header">
+
+            @Html.ActionLink("WEB QUIZ SYSTEM", "Index", "Home", new { area = " " }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li style="color:white;">@Html.ActionLink("Admin Login", "tlogin", "Home")</li>
+                <li style="margin-left:700px;">
+                    @Html.ActionLink("Logout", "Logout", "Home")
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<h2>All Chapters</h2>
+
+
+<hr />
+<table class="table" style="background-color:#00044b;width:98%; color:white;">
+    <tr>
+        <th style="text-align:center">
+            Chapter ID
+        </th>
+        <th style="text-align:center">
+            Chapter Name
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.ch_id)
+            </td>
+            <td style="text-align:center">
+                @Html.DisplayFor(modelItem => item.ch_name)
+            </td>
+            <td> <a class="btn btn-info btn-sm" href="@Url.Action("ViewAllQuestions",new {id=item.ch_id })"> View All Question(s) of this Chapter</a></td>
+            <td> <a class="btn btn-info btn-sm" href="@Url.Action("Edit_Chapter",new {id=item.ch_id })"> Edit Chapter</a></td>
+            <td> <a class="btn btn-info btn-sm" href="@Url.Action("Delete_Chapter",new {id=item.ch_id })"> Delete Chapter</a></td>
+
+        </tr>
+    }
+
+</table>
+<div id="container" style="margin-left:20px">
+    <p></p>
+    <p></p>
+    <div class="pagination" style="margin-left: 400px
+">
+        Page @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount @Html.PagedListPager(Model, page => Url.Action("ViewAllChapters", new { page }))
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

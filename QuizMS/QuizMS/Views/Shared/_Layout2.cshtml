@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+
+
+</head>
+<body>
+    <div class="row">
+
+        <div class="col-md-2" style="height:850px;  background-color:#00044b;margin-top:50px;">
+            <div style="width:100%" class="container-list-group">
+                <h3 style="color:white;text-align:center">Admin Panel</h3><hr />
+                <div class="list-group-item">
+                    @Html.ActionLink("Student Exam Record", "Dashboard", new { @class = "list-group-item" })
+                </div>
+                <div class="list-group-item">
+
+                    @Html.ActionLink("Add Category", "Add_Category", new { @class = "list-group-item" })
+                </div>
+                <div class="list-group-item">
+                    @Html.ActionLink("Add Chapter", "Add_Chapter", new { @class = "list-group-item" })
+                </div>
+                <div class="list-group-item">
+                    @Html.ActionLink("Add Question", "Add_Question", new { @class = "list-group-item" })
+                </div>
+                <div class="list-group-item">
+                    @Html.ActionLink("Student Record", "Student_Record", new { @class = "list-group-item" })
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="col-md-10" style="height:900px; border:1px solid gray;">
+
+            @RenderBody()
+        </div>
+
+
+
+    </div>
+
+
+
+    <footer>
+        <div class="container-fluid" style="background-color:#121212;height:40px">
+            <p style="color:white;text-align:center;margin-top:10px">Copyright © 2020 by WEB QUIZ SYSTEM </p>
+        </div>
+    </footer>
+</body>
+</html>

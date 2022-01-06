@@ -1,0 +1,91 @@
+﻿@model QuizMS.Models.tbl_category
+
+@{
+    ViewBag.Title = "Add_Category";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<title>Add Category</title>
+<style>
+    body {
+        background-image: url('../../Content/Img/login2.jpg');
+        background-size: cover;
+    }
+</style>
+<div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#00044b;font-size:18px;">
+    <div class="container">
+        <div class="navbar-header">
+
+            @Html.ActionLink("WEB QUIZ SYSTEM", "Index", "Home", new { area = " " }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li style="color:white;">@Html.ActionLink("Admin Login", "tlogin", "Home")</li>
+                <li style="margin-left:700px;">
+                    @Html.ActionLink("Logout", "Logout", "Home")
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<h2 style="margin-left:200px;margin-top:-5px;">Add New Category</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="width:600px;">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <a href="~/Views/Home/Add_Category.cshtml">~/Views/Home/Add_Category.cshtml</a>
+            @Html.LabelFor(model => model.cat_name, "Category Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cat_name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.cat_name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="margin-left:530px;margin-top:-20px">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+<br />
+<br />
+<hr />
+
+<h2 style="margin-left:200px;margin-top:-5px;">Category Table</h2>
+<table class="table table-responsive" style="background-color:#00044b;color:white; width:500px;margin-left:100px">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>View All Questions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewData["list"] as List<QuizMS.Models.tbl_category>)
+        {
+            <tr>
+                <td>@item.cat_id</td>
+                <td>@item.cat_name</td>
+
+                <td> <a class="btn btn-info btn-sm" href="@Url.Action("ViewAllChapters",new {id=item.cat_id })"> View All Chapter(s) of this Category</a></td>
+                <td> <a class="btn btn-info btn-sm" href="@Url.Action("Edit_Category",new {id=item.cat_id })"> Edit Category</a></td>
+                <td> <a class="btn btn-info btn-sm" href="@Url.Action("Delete_Category",new {id=item.cat_id })"> Delete Category</a></td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+
